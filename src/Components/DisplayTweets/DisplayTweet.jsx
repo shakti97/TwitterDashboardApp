@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './DisplayTweet.css';
 
 const DisplayTweet=(props)=>{
     return (
