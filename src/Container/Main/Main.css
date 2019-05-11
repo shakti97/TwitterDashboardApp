@@ -5,3 +5,7 @@
 .redColor{
     color : red;
 }
+.submitButton{
+    text-align: center;
+    margin: 2% 0%;
+}
