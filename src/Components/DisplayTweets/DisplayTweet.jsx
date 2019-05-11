@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
 
-class DisplayTweet extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { 
-
-        };
-    }
-    render() {
-        return (
-            <React.Fragment>
-
-            </React.Fragment>
-        );
-    }
+const DisplayTweet=(props)=>{
+    return (
+        <React.Fragment>
+            {props.tweets.map((tweet,index)=>{
+                return (
+                    <div className='tweet' key={index}>{tweet.text}</div>
+                )
+            })
+            }
+        </React.Fragment>
+    );
 }
 
 export default DisplayTweet;
