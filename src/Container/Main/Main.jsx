@@ -19,6 +19,7 @@ class Main extends Component {
       clientSideValidation: [],
       serverSideValidation : [],
       tweets: [],
+      hashTagArray : [],
       filterTweets: []
     };
   }
@@ -53,6 +54,9 @@ class Main extends Component {
     }
     if (this.state.filterName === "textSearch") {
       this.filterByText(this.state.searchValue);
+    }
+    if(this.state.filterName==='hashTags'){
+      this.getMultipleSelectedValue();
     }
   };
   filterByText = searchedText => {
@@ -102,9 +106,48 @@ class Main extends Component {
       },
       () => {
         console.log(this.state.tweets);
+        this.getHashTagArray();
       }
     );
   };
+  getHashTagArray=()=>{
+    var hashTagArray=[];
+    this.state.tweets.forEach((tweet,index)=>{
+      tweet.entities.hashtags.forEach(hash=>{
+        var hashObject={
+          value : hash.text,
+          tweetIndex : index
+        }
+        hashTagArray.push(hashObject);
+      })
+    })
+    this.setState({
+      hashTagArray : hashTagArray
+    },()=>{
+      console.log(this.state.hashTagArray);
+    })
+  }
+  getMultipleSelectedValue=()=>{
+    var tweetsArray=[];
+    var selectedTagArray=[];
+    var x=document.getElementById("hashTagArray");
+    for (var i = 0; i < x.options.length; i++) {
+        if(x.options[i].selected ==true){
+            this.state.hashTagArray.forEach(hash=>{
+              if(hash.value===x.options[i].value){
+                  selectedTagArray.push(hash.tweetIndex);              
+              }
+            })
+        }
+    }
+    selectedTagArray=[...new Set(selectedTagArray)];
+    selectedTagArray.forEach(tagIndex=>{
+      tweetsArray.push(this.state.tweets[tagIndex]);
+    })
+    this.setState({
+      filterTweets: tweetsArray
+    });
+  }
   getMyServerTweets = (userName = "Shakti2397") => {
     Axios.get("https://ancient-ocean-37070.herokuapp.com/tweets/" + userName).then(response => {
       console.log(response);
@@ -152,6 +195,7 @@ class Main extends Component {
               clientSideValidation={this.state.clientSideValidation}
               filterName={this.state.filterName}
               handleChange={this.handleChange}
+              hashTagArray={this.state.hashTagArray}
             />
             {!this.state.show && <DisplayTweet tweets={this.state.filterTweets} />}
             {this.state.show && (
