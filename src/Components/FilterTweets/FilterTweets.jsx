@@ -14,7 +14,7 @@ const FilterTweets = props => {
               className="form-control"
               onChange={props.handleChange}
             >
-              <option value="" defaultValue>
+              <option value="" disabled defaultValue>
                 Select Filter Type
               </option>
               <option value="tweetLength">Tweet Length</option>
