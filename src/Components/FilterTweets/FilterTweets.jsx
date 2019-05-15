@@ -16,6 +16,7 @@ const FilterTweets =(props)=>{
                             <option value="" defaultValue>Select Filter Type</option>
                             <option value="tweetLength">Tweet Length</option>
                             <option value="textSearch">Text Search</option>
+                            <option value='hashTags'>HashTags</option>
                         </select>
                     </div>
                     <div className="col-md-1">

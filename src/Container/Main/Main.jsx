@@ -106,7 +106,7 @@ class Main extends Component {
     );
   };
   getMyServerTweets = (userName = "Shakti2397") => {
-    Axios.get("http://localhost:8080/tweets/" + userName).then(response => {
+    Axios.get("https://ancient-ocean-37070.herokuapp.com/tweets" + userName).then(response => {
       console.log(response);
       if(response.data.error){
             this.setState({
