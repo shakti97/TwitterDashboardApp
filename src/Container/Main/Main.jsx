@@ -25,12 +25,19 @@ class Main extends Component {
   }
   handleChange = event => {
     event.preventDefault();
+    var targetName=event.target.name;
     this.setState(
       {
         [event.target.name]: event.target.value
       },
       () => {
         console.log(this.state);
+        if(targetName==='filterName'){
+          this.setState({
+            filterTweets: this.state.tweets
+          });
+          return;
+        }
         if (this.state.searchValue === "") {
           this.setState({
             filterTweets: this.state.tweets
